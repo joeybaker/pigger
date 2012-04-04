@@ -95,7 +95,7 @@ $(function(){
     , container = options.container
     , dates = options.dates
     w = dates.length *10,
-    h = 600,
+    h = $(window).height() / 2 - 50,
     margin = 20,
     y = d3.scale.linear().domain([0, d3.max(totals)]).range([0 + margin, h - margin]),
     x = d3.scale.linear().domain([0, totals.length]).range([0 + margin, w - margin])
