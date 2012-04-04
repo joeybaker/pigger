@@ -195,7 +195,7 @@ $(function(){
       , container: "#" + container
       , dates: dates
     })
-    scrollTo(0, $('body').width())
+    scrollTo($('body').width(), 0)
   }
 
   setInterval(function(){
