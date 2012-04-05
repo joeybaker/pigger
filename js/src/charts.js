@@ -213,7 +213,7 @@ $(function(){
     // }
   }
 
-  // setInterval(function(){
+  setInterval(function(){
     $("#dns, #ip").children().not('h1, ol').remove()
 
     $.ajax({
