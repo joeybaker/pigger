@@ -32,12 +32,15 @@
   <div id="content" role="main">
     <section id="ip">
       <h1>Lookup by IP</h1>
+      <ol class="problems"></ol>
     </section><!-- /#lookups -->
     <section id="dns">
-      <h1>Lookup by DNS</h1>
+      <h1>Lookup by www.meraki.com</h1>
+      <ol class="problems"></ol>
     </section><!-- /#lookups -->
     <aside id="key">
       <span class="totals">Total Time</span>
+      <span class="starts">Start Transfer Time</span>
       <span class="lookups">Lookup Time</span>
       <button id="toggle-scroll" class="btn">toggle scroll</button>
     </aside>
@@ -67,16 +70,6 @@
          // Load minified lib
          load: 'js/bin/global.min.js'
       }
-      // Anything else that needs to be loaded should happen here!
-      // , {
-      //   load: 'js/lib/g.raphael/raphael-min.js'
-      // }
-      // , {
-      //   load: 'js/lib/g.raphael/g.raphael.js'
-      // }
-      // , {
-      //   load: 'js/lib/g.raphael/g.line.js'
-      // }
       , {
         load: 'js/lib/d3/d3.v2.js'
       }

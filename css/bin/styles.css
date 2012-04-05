@@ -4141,6 +4141,9 @@ path.totals {
 path.lookups {
   stroke: #0000ff;
 }
+path.starts {
+  stroke: #16bec2;
+}
 line {
   stroke: black;
 }
@@ -4151,10 +4154,28 @@ h1 {
   position: fixed;
   left: 10px;
 }
+.problems {
+  display: block;
+  position: fixed;
+  right: 50%;
+  background: #eee;
+  color: red;
+}
 #key {
   position: fixed;
   top: 10px;
   right: 10px;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -webkit-transition: 0.1s all;
+  -moz-transition: 0.1s all;
+  -ms-transition: 0.1s all;
+  -o-transition: 0.1s all;
+  transition: 0.1s all;
+}
+#key:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
 }
 #key span {
   display: block;
@@ -4164,4 +4185,7 @@ h1 {
 }
 #key span.lookups {
   color: #0000ff;
+}
+#key span.starts {
+  color: #16bec2;
 }

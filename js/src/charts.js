@@ -95,6 +95,7 @@ $(function(){
     , lookups = options.lookups
     , container = options.container
     , dates = options.dates
+    , starts = options.starts || null
     w = dates.length *10,
     h = $(window).height() / 2 - 50,
     margin = 20,
@@ -120,6 +121,10 @@ $(function(){
     g.append("svg:path")
       .attr("d", line(lookups))
       .attr("class", "lookups")
+
+    g.append("svg:path")
+      .attr("d", line(starts))
+      .attr("class", "starts")
     
     g.append("svg:line")
         .attr("x1", x(0))
@@ -177,8 +182,9 @@ $(function(){
 
   function data_to_chart(data, container){
     var d = CSVToArray(data, " ")
-      d_length = d.length
+      , d_length = d.length
       , lookups = []
+      , starts = []
       , totals = []
       , dates = []
 
@@ -186,6 +192,7 @@ $(function(){
     for (var i = 1; i < d_length; i++){ // skip the first row because it's headers
       dates[i-1] = d[i][0]
       lookups[i-1] = d[i][1] || null
+      starts[i-1] = d[i][4] || null
       totals[i-1] = d[i][5] || null
     }
     // console.log(totals);
@@ -193,19 +200,25 @@ $(function(){
     chart({
       totals: totals
       , lookups: lookups
-      , container: "#" + container
+      , starts: starts
+      , container: container
       , dates: dates
     })
     
     if (scroll_toggle) scrollTo( 1000000, 0)
+
+    // if (starts[d_length-2] > 0){
+      
+    //   $('.problems', container).append('<li> Start Transfer Time: ' + starts[d_length-2] + ' at ' + dates[d_length-2] + '</li>')
+    // }
   }
 
-  setInterval(function(){
-    $("#dns, #ip").children().not('h1').remove()
+  // setInterval(function(){
+    $("#dns, #ip").children().not('h1, ol').remove()
 
     $.ajax({
       url: './by-dns.out'
-      , success: function(data){ data_to_chart(data, "dns") }
+      , success: function(data){ data_to_chart(data, "#dns") }
       , error: function(jqXHR, status, err){
         console.log(err)
       }
@@ -213,7 +226,7 @@ $(function(){
 
     $.ajax({
       url: './by-ip.out'
-      , success: function(data){ data_to_chart(data, "ip") }
+      , success: function(data){ data_to_chart(data, "#ip") }
       , error: function(jqXHR, status, err){
         console.log(err)
       }
