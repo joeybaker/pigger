@@ -1,5 +1,6 @@
 $(function(){
-  // "use strict";
+
+  var scroll_toggle = true
 
 
    // This will parse a delimited string into an array of
@@ -195,7 +196,8 @@ $(function(){
       , container: "#" + container
       , dates: dates
     })
-    scrollTo( 1000000, 0)
+    
+    if (scroll_toggle) scrollTo( 1000000, 0)
   }
 
   setInterval(function(){
@@ -217,5 +219,12 @@ $(function(){
       }
     })
   }, 1000 * 7)
+
+  $('#toggle-scroll').on('click', function(){
+    scroll_toggle = !scroll_toggle
+    $(this).toggleClass('btn-inverse')
+  })
+
+
 
 }())
