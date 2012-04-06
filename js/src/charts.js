@@ -113,10 +113,6 @@ $(function(){
     var line = d3.svg.line()
         .x(function(d,i) { return x(i); })
         .y(function(d) { return -1 * y(d); })
-    
-    g.append("svg:path")
-      .attr("d", line(totals))
-      .attr("class", "totals")
 
     g.append("svg:path")
       .attr("d", line(lookups))
@@ -126,6 +122,10 @@ $(function(){
       .attr("d", line(starts))
       .attr("class", "starts")
     
+    g.append("svg:path")
+      .attr("d", line(totals))
+      .attr("class", "totals")
+
     g.append("svg:line")
         .attr("x1", x(0))
         .attr("y1", -1 * y(0))
@@ -139,16 +139,16 @@ $(function(){
         .attr("y2", -1 * y(d3.max(totals)))
     
     g.selectAll(".xLabel")
-        .data(x.ticks(w/200))
+        .data(x.ticks(w/400))
         .enter().append("svg:text")
         .attr("class", "xLabel")
         .text (function(d) {
           var date = new Date(dates[d]*1000)
-          return date.toUTCString()
+          return new Date(date.toUTCString()).toLocaleString()
         })
         .attr("x", function(d) { return x(d) })
         .attr("y", 0)
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "left")
 
     g.selectAll(".yLabel")
         .data(y.ticks(4))
@@ -161,7 +161,7 @@ $(function(){
         .attr("dy", 4)
     
     g.selectAll(".xTicks")
-        .data(x.ticks(5))
+        .data(x.ticks(w/400))
         .enter().append("svg:line")
         .attr("class", "xTicks")
         .attr("x1", function(d) { return x(d); })
