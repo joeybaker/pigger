@@ -44,3 +44,4 @@ build/config/buildinfo.properties
 
 # ignore data files
 *.out
+*.out.*
