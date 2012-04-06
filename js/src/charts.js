@@ -213,29 +213,38 @@ $(function(){
     // }
   }
 
-  setInterval(function(){
-    $("#dns, #ip").children().not('h1, ol').remove()
+  var loader = function(){
+      $("#dns, #ip").children().not('h1, ol').remove()
 
-    $.ajax({
-      url: './by-dns.out'
-      , success: function(data){ data_to_chart(data, "#dns") }
-      , error: function(jqXHR, status, err){
-        console.log(err)
-      }
-    })
+      $.ajax({
+        url: './by-dns.out'
+        , success: function(data){ data_to_chart(data, "#dns") }
+        , error: function(jqXHR, status, err){
+          console.log(err)
+        }
+      })
 
-    $.ajax({
-      url: './by-ip.out'
-      , success: function(data){ data_to_chart(data, "#ip") }
-      , error: function(jqXHR, status, err){
-        console.log(err)
-      }
-    })
-  }, 1000 * 7)
+      $.ajax({
+        url: './by-ip.out'
+        , success: function(data){ data_to_chart(data, "#ip") }
+        , error: function(jqXHR, status, err){
+          console.log(err)
+        }
+      })
+    }
+    , refresher = setInterval(loader, 1000 * 5)
 
-  $('#toggle-scroll').on('click', function(){
-    scroll_toggle = !scroll_toggle
-    $(this).toggleClass('btn-inverse')
+  loader()
+
+  $('#toggle-refresh').on('click', function(){
+    var $this = $(this)
+
+    $this.toggleClass('btn-inverse')
+
+    $this.hasClass('btn-inverse')
+      ? clearInterval(refresher)
+      : refresher = setInterval(loader, 1000 * 5)
+
   })
 
 
